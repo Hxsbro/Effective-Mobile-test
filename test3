@@ -1,0 +1,42 @@
+graph TB
+    subgraph "Источники событий"
+        A[Заказы MS] -->|событие| E[Event Bus]
+        B[Корзина MS] -->|событие| E
+        C[Пользователи MS] -->|событие| E
+        D[Аналитика MS] -->|событие| E
+        M[Маркетинг MS] -->|событие| E
+    end
+    
+    subgraph "Ядро PUSH системы"
+        E[Event Bus<br/>Kafka/RabbitMQ] --> F[PUSH Gateway]
+        F --> G[Шаблоны сообщений]
+        G --> H[Логика таргетинга]
+        H --> I[Персонализация]
+        I --> J[Расписание отправки]
+    end
+    
+    subgraph "Внешние сервисы"
+        J --> K[APNs<br/>Apple Push]
+        J --> L[FCM<br/>Firebase Cloud]
+        K --> P[Мобильные устройства]
+        L --> P
+    end
+    
+    subgraph "Управление и аналитика"
+        Q[Admin Portal] --> R[Конфигурация шаблонов]
+        R --> G
+        Q --> S[Статистика отправок]
+        S --> T[Отчеты по эффективности]
+        U[A/B тестирование] --> H
+    end
+    
+    subgraph "Хранение данных"
+        V[(Токены устройств)] --> F
+        W[(История отправок)] --> S
+        X[(Пользовательские настройки)] --> H
+    end
+    
+    style F fill:#e1f5fe
+    style K fill:#f3e5f5
+    style L fill:#f1f8e9
+    style Q fill:#fff3e0
