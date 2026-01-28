@@ -35,8 +35,3 @@ graph TB
         W[(История отправок)] --> S
         X[(Пользовательские настройки)] --> H
     end
-    
-    style F fill:#e1f5fe
-    style K fill:#f3e5f5
-    style L fill:#f1f8e9
-    style Q fill:#fff3e0
